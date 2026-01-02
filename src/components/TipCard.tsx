@@ -10,13 +10,13 @@ interface TipCardProps {
   color?: string;
 }
 
-export default function TipCard({ title, description, category, icon, color = 'primary' }: TipCardProps) {
+export default function TipCard({ title, description, category, icon }: TipCardProps) {
   return (
     <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-gray-100 cursor-pointer">
       <CardHeader>
         <div className="flex items-start justify-between mb-3">
-          <div className={`p-3 rounded-xl bg-${color}/10 group-hover:bg-${color}/20 transition-colors`}>
-            <Icon name={icon} size={24} className={`text-${color}`} />
+          <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+            <Icon name={icon} size={24} className="text-primary" />
           </div>
           <Badge variant="secondary" className="text-xs">
             {category}
