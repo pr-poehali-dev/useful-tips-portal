@@ -1,70 +1,43 @@
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import Icon from '@/components/ui/icon';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
-  const [activeSection, setActiveSection] = useState('home');
-
-  const scrollToSection = (sectionId: string) => {
-    setActiveSection(sectionId);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-      <div className="container mx-auto px-6 py-4">
-        <nav className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Icon name="Lightbulb" size={28} className="text-primary" />
-            <span className="text-xl font-bold text-foreground">Советы</span>
-          </div>
-          
-          <div className="hidden md:flex items-center space-x-8">
-            <button
-              onClick={() => scrollToSection('home')}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                activeSection === 'home' ? 'text-primary' : 'text-foreground/70'
-              }`}
-            >
-              Главная
-            </button>
-            <button
-              onClick={() => scrollToSection('tips')}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                activeSection === 'tips' ? 'text-primary' : 'text-foreground/70'
-              }`}
-            >
-              Советы
-            </button>
-            <button
-              onClick={() => scrollToSection('categories')}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                activeSection === 'categories' ? 'text-primary' : 'text-foreground/70'
-              }`}
-            >
-              Категории
-            </button>
-            <button
-              onClick={() => scrollToSection('contact')}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                activeSection === 'contact' ? 'text-primary' : 'text-foreground/70'
-              }`}
-            >
-              Контакты
-            </button>
+    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
+      <div className="container mx-auto px-4">
+        <div className="flex h-16 items-center justify-between gap-4">
+          <Link to="/" className="flex items-center gap-2">
+            <div className="bg-primary p-2 rounded-lg">
+              <Icon name="Package" size={24} className="text-white" />
+            </div>
+            <span className="font-bold text-xl hidden sm:inline">Доска объявлений</span>
+          </Link>
+
+          <div className="flex-1 max-w-2xl mx-4">
+            <div className="relative">
+              <Icon name="Search" size={20} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Input 
+                placeholder="Поиск объявлений..." 
+                className="pl-10 pr-4"
+              />
+            </div>
           </div>
 
-          <Button onClick={() => scrollToSection('subscribe')} className="hidden md:inline-flex">
-            Подписаться
-          </Button>
-
-          <Button variant="ghost" size="icon" className="md:hidden">
-            <Icon name="Menu" size={24} />
-          </Button>
-        </nav>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" className="hidden sm:inline-flex">
+              <Icon name="Heart" size={20} />
+            </Button>
+            <Button variant="ghost" size="icon" className="hidden sm:inline-flex">
+              <Icon name="User" size={20} />
+            </Button>
+            <Button className="gap-2">
+              <Icon name="Plus" size={20} />
+              <span className="hidden sm:inline">Подать объявление</span>
+            </Button>
+          </div>
+        </div>
       </div>
     </header>
   );
